@@ -1,38 +1,26 @@
 #include <iostream>
 
-
-struct Vector2 {
-    int x, y;
-
-    Vector2(int p_x = 0, int p_y = 0) {
-        x = p_x, y = p_y;
-    }
-};
+#include "map.h"
+#include "renderer.h"
 
 
-enum ObjectType {
-    NONE,
-    PLAYER,
-    WALL,
-    COIN,
-};
+int32_t main(int argc, char const *argv[]) {
+	Vector2 origin = get_cursor_pos();
+	if (origin == Vector2(-1)) return 70;
 
+	Map map = Map();
+	if (!map.is_valid()) return 69;
 
-struct GameObject {
-    Vector2 position;
-    ObjectType type;
-
-    GameObject(Vector2 p_pos = Vector2(), ObjectType p_type = NONE) {
-        position = p_pos;
-        type = p_type;
-    }
-};
-
-
-int32_t main(int argc, char const *argv[])
-{
-    GameObject test_object = GameObject(Vector2(6, 9), PLAYER);
-    printf("%d", test_object.position.x);
-
+	char input;
+	while (true) {
+		for (int y = 0; y < map.data.size(); y++) {
+			for (int x = 0; x < map.data[y].size(); x++) {
+				move_cursor(x + origin.x, y + origin.y);
+				printf("%c", sprite_table[map.data[y][x]]);
+			}
+			printf("\n");
+		}
+	}
+	
     return 0;
 }
