@@ -6,7 +6,7 @@
 
 
 class Map{
-	static std::string lvl0[5];
+	static std::string lvl0[];
 
 	bool valid = true;
 
@@ -19,6 +19,13 @@ class Map{
 
 			for (int x = 0; x < size.x; x++) {
 				data[y][x] = get_type_from_sprite(r_lvl[y][x]);
+				switch (data[y][x]) {
+					case PLAYER:
+						spawn = Vector2(x, y);
+						break;
+					default:
+						break;
+				}
 			}
 		}
 
@@ -27,6 +34,7 @@ class Map{
 	
 	public:
 		Vector2 size;
+		Vector2 spawn = Vector2(1);
 		std::vector<std::vector<ObjectType>> data;
 
 		bool is_valid() { return valid; }
@@ -44,11 +52,26 @@ class Map{
 };
 
 
-std::string Map::lvl0[5] = {
-	"#####",
-	"#   #",
-	"#   #",
-	"#   #",
-	"#####"
+std::string Map::lvl0[20] = {
+	"####################",
+	"#           #      #",
+	"#   X       #      #",
+	"#      ##########  #",
+	"#      #           #",
+	"#      #  ###      #",
+	"#      #  #        #",
+	"#      ########    #",
+	"#         #        #",
+	"####      #  0     #",
+	"#         #        #",
+	"#       ###    #####",
+	"#         #        #",
+	"#    #########     #",
+	"#      #           #",
+	"#      #           #",
+	"#      #      #    #",
+	"#             #    #",
+	"#             #    #",
+	"####################"
 };
 

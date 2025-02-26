@@ -13,7 +13,7 @@ Vector2 get_cursor_pos() {
 }
 
 void move_cursor(int p_xpos = 0, int p_ypos = 0) {
-	printf("\033[%d;%dH", p_ypos+1, p_xpos+1);
+	printf("\033[%d;%dH", p_ypos, p_xpos);
 }
 
 void clear(bool p_from_cursor = false) {
